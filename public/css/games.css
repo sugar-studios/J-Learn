@@ -1,0 +1,100 @@
+/* ==============
+    GAMES PAGE STYLES
+=============== */
+#games-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+/* Game Selection Row */
+.game-selection {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.game-box {
+    width: 200px;
+    height: 200px;
+    background: rgb(87, 178, 131);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.game-box:hover {
+    background: rgb(101, 186, 142);
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-selection {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .game-box {
+        width: 80%;
+        height: 150px;
+    }
+}
+
+
+
+
+/* games.css */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#hiragana-table {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    padding: 10px;
+}
+
+.table-cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.char-button {
+    margin: 5px;
+    padding: 5px;
+}
+
+.error {
+    background-color: red;
+    animation: shake 0.2s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}

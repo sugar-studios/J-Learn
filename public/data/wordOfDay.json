@@ -1,0 +1,488 @@
+{
+    "words": [
+      {
+        "kanji": "花火",
+        "hiragana": "はなび",
+        "romaji": "hanabi",
+        "english": "fireworks",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "流星",
+        "hiragana": "りゅうせい",
+        "romaji": "ryuusei",
+        "english": "shooting star",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "蛍",
+        "hiragana": "ほたる",
+        "romaji": "hotaru",
+        "english": "firefly",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "木漏れ日",
+        "hiragana": "こもれび",
+        "romaji": "komorebi",
+        "english": "sunlight filtering through trees",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "積読",
+        "hiragana": "つんどく",
+        "romaji": "tsundoku",
+        "english": "buying books and letting them pile up without reading",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "侘寂",
+        "hiragana": "わびさび",
+        "romaji": "wabi-sabi",
+        "english": "aesthetic of imperfection",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "幽玄",
+        "hiragana": "ゆうげん",
+        "romaji": "yuugen",
+        "english": "a deep, mysterious sense of beauty",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "風物詩",
+        "hiragana": "ふうぶつし",
+        "romaji": "fuubutsushi",
+        "english": "things that evoke a specific season",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "忍び足",
+        "hiragana": "しのびあし",
+        "romaji": "shinobiashi",
+        "english": "walking silently like a ninja",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "泡沫",
+        "hiragana": "うたかた",
+        "romaji": "utakata",
+        "english": "ephemeral, like a bubble on water",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "斜陽",
+        "hiragana": "しゃよう",
+        "romaji": "shayou",
+        "english": "the setting sun or the decline of something once great",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "猫舌",
+        "hiragana": "ねこじた",
+        "romaji": "nekojita",
+        "english": "a person who can't eat hot food",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "物の哀れ",
+        "hiragana": "もののあわれ",
+        "romaji": "mono no aware",
+        "english": "a sensitivity to the fleeting nature of things",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "秋雨",
+        "hiragana": "あきさめ",
+        "romaji": "akisame",
+        "english": "gentle autumn rain",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "生き甲斐",
+        "hiragana": "いきがい",
+        "romaji": "ikigai",
+        "english": "reason for living, life purpose",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "柔軟",
+        "hiragana": "じゅうなん",
+        "romaji": "juunan",
+        "english": "flexible, adaptable",
+        "part_of_speech": "adjective"
+      },
+      {
+        "kanji": "幽体離脱",
+        "hiragana": "ゆうたいりだつ",
+        "romaji": "yuutai ridatsu",
+        "english": "out-of-body experience",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "泡雪",
+        "hiragana": "あわゆき",
+        "romaji": "awayuki",
+        "english": "light, fleeting snowfall",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "月見",
+        "hiragana": "つきみ",
+        "romaji": "tsukimi",
+        "english": "moon viewing",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "無我夢中",
+        "hiragana": "むがむちゅう",
+        "romaji": "mugamuchuu",
+        "english": "being absorbed in something to the point of losing self-awareness",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "空耳",
+        "hiragana": "そらみみ",
+        "romaji": "soramimi",
+        "english": "mishearing something in an amusing way",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "半端",
+        "hiragana": "はんぱ",
+        "romaji": "hanpa",
+        "english": "something incomplete, half-done",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "微睡み",
+        "hiragana": "まどろみ",
+        "romaji": "madoromi",
+        "english": "light drowsiness, dozing",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "道草を食う",
+        "hiragana": "みちくさをくう",
+        "romaji": "michikusa wo kuu",
+        "english": "to take a detour, to get sidetracked",
+        "part_of_speech": "verb"
+      },
+      {
+        "kanji": "立ち往生",
+        "hiragana": "たちおうじょう",
+        "romaji": "tachioujou",
+        "english": "being stuck, stranded, unable to move forward",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "夜更かし",
+        "hiragana": "よふかし",
+        "romaji": "yofukashi",
+        "english": "staying up late",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "日和",
+        "hiragana": "ひより",
+        "romaji": "hiyori",
+        "english": "perfect weather for an activity",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "時雨",
+        "hiragana": "しぐれ",
+        "romaji": "shigure",
+        "english": "a sudden passing rain shower in autumn or winter",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "風花",
+        "hiragana": "かざはな",
+        "romaji": "kazahana",
+        "english": "snowflakes drifting in a clear sky",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "水鏡",
+        "hiragana": "みずかがみ",
+        "romaji": "mizukagami",
+        "english": "reflection of scenery on water",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "揺蕩う",
+        "hiragana": "たゆたう",
+        "romaji": "tayutau",
+        "english": "to sway, drift, waver",
+        "part_of_speech": "verb"
+      },
+      {
+        "kanji": "雪解け",
+        "hiragana": "ゆきどけ",
+        "romaji": "yukidoke",
+        "english": "melting of snow, thawing",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "風情",
+        "hiragana": "ふぜい",
+        "romaji": "fuzei",
+        "english": "an elegant, refined atmosphere",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "心地よい",
+        "hiragana": "ここちよい",
+        "romaji": "kokochiyoi",
+        "english": "pleasant, comfortable feeling",
+        "part_of_speech": "adjective"
+      },
+      {
+        "kanji": "夜風",
+        "hiragana": "よかぜ",
+        "romaji": "yokaze",
+        "english": "night breeze",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "月光",
+        "hiragana": "げっこう",
+        "romaji": "gekkou",
+        "english": "moonlight",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "流れ星",
+        "hiragana": "ながれぼし",
+        "romaji": "nagareboshi",
+        "english": "shooting star",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "灯火",
+        "hiragana": "ともしび",
+        "romaji": "tomoshibi",
+        "english": "flickering light, lantern glow",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "夜明け",
+        "hiragana": "よあけ",
+        "romaji": "yoake",
+        "english": "dawn, daybreak",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "夕映え",
+        "hiragana": "ゆうばえ",
+        "romaji": "yuubae",
+        "english": "glow of the setting sun",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "春風",
+        "hiragana": "はるかぜ",
+        "romaji": "harukaze",
+        "english": "spring breeze",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "深呼吸",
+        "hiragana": "しんこきゅう",
+        "romaji": "shinkokyuu",
+        "english": "deep breath",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "風鈴",
+        "hiragana": "ふうりん",
+        "romaji": "fuurin",
+        "english": "wind chime",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "木枯らし",
+        "hiragana": "こがらし",
+        "romaji": "kogarashi",
+        "english": "cold wind that signals the start of winter",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "湯気",
+        "hiragana": "ゆげ",
+        "romaji": "yuge",
+        "english": "steam rising from hot water",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "陽だまり",
+        "hiragana": "ひだまり",
+        "romaji": "hidamari",
+        "english": "a warm, sunlit spot",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "落ち葉",
+        "hiragana": "おちば",
+        "romaji": "ochiba",
+        "english": "fallen leaves",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "霧雨",
+        "hiragana": "きりさめ",
+        "romaji": "kirisame",
+        "english": "light drizzle",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "朝焼け",
+        "hiragana": "あさやけ",
+        "romaji": "asayake",
+        "english": "morning glow",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "月虹",
+        "hiragana": "げっこう",
+        "romaji": "gekko",
+        "english": "lunar rainbow",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "霜柱",
+        "hiragana": "しもばしら",
+        "romaji": "shimobashira",
+        "english": "frost pillars formed on cold mornings",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "灯火親しむ",
+        "hiragana": "とうかしたしむ",
+        "romaji": "touka shitashimu",
+        "english": "enjoying reading by lamplight",
+        "part_of_speech": "verb"
+      },
+      {
+        "kanji": "幻影",
+        "hiragana": "げんえい",
+        "romaji": "gen'ei",
+        "english": "illusion, mirage",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "飛沫",
+        "hiragana": "しぶき",
+        "romaji": "shibuki",
+        "english": "spray, splash of water",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "珊瑚",
+        "hiragana": "さんご",
+        "romaji": "sango",
+        "english": "coral",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "星屑",
+        "hiragana": "ほしくず",
+        "romaji": "hoshikuzu",
+        "english": "stardust",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "透き通る",
+        "hiragana": "すきとおる",
+        "romaji": "sukitooru",
+        "english": "to be transparent, to be crystal clear",
+        "part_of_speech": "verb"
+      },
+      {
+        "kanji": "波紋",
+        "hiragana": "はもん",
+        "romaji": "hamon",
+        "english": "ripples on water",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "浮遊",
+        "hiragana": "ふゆう",
+        "romaji": "fuyuu",
+        "english": "floating, drifting",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "流麗",
+        "hiragana": "りゅうれい",
+        "romaji": "ryuurei",
+        "english": "graceful, flowing (especially for writing or movement)",
+        "part_of_speech": "adjective"
+      },
+      {
+        "kanji": "滲む",
+        "hiragana": "にじむ",
+        "romaji": "nijimu",
+        "english": "to blur, to spread (like ink on paper or tears in eyes)",
+        "part_of_speech": "verb"
+      },
+      {
+        "kanji": "稲妻",
+        "hiragana": "いなずま",
+        "romaji": "inazuma",
+        "english": "lightning flash",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "囁く",
+        "hiragana": "ささやく",
+        "romaji": "sasayaku",
+        "english": "to whisper",
+        "part_of_speech": "verb"
+      },
+      {
+        "kanji": "夢幻",
+        "hiragana": "むげん",
+        "romaji": "mugen",
+        "english": "dreamlike, fantasy",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "無垢",
+        "hiragana": "むく",
+        "romaji": "muku",
+        "english": "purity, innocence",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "真昼",
+        "hiragana": "まひる",
+        "romaji": "mahiru",
+        "english": "midday, high noon",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "空虚",
+        "hiragana": "くうきょ",
+        "romaji": "kuukyo",
+        "english": "emptiness, void",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "紅葉",
+        "hiragana": "もみじ",
+        "romaji": "momiji",
+        "english": "autumn leaves, maple tree",
+        "part_of_speech": "noun"
+      },
+      {
+        "kanji": "時空",
+        "hiragana": "じくう",
+        "romaji": "jikuu",
+        "english": "space-time",
+        "part_of_speech": "noun"
+      }
+    ]
+  }
+  

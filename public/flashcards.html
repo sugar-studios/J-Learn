@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>J-Learn - Flashcards</title>
+  <link rel="icon" type="image/png" href="media/icon-1920.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/flashcards.css">
+  <script src="js/menu.js" defer></script>
+  <script src="js/flashcardStorage.js" defer></script>
+  <script src="js/flashcardManager.js" defer></script>
+  <script src="js/flashcardEditor.js" defer></script>
+  
+</head>
+<body>
+
+  <header class="nav-header">
+    <h1 class="nav-header-logo">
+        <a href="index.html">
+            <img src="media/logo-1920.png" alt="J-Learn Logo">
+        </a>
+    </h1>
+
+    <div class="nav-toggle" id="navToggle">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <nav class="nav-header-links-container" id="navMenu">
+        <ul class="nav-header-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="flashcards.html">FlashCards</a></li>
+            <li><a href="games.html">Games</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Create/Edit Flashcard Set -->
+    <section id="create-set">
+        <h2 id="create-set-title">Create/Edit a Flashcard Set</h2>
+        <input type="text" id="set-name" placeholder="Set Name">
+
+        <!-- Tag Selection -->
+        <div class="ham-tag-toggle-containter">
+            <h3>Tags</h3>
+            <div class="tag-toggle" id="tagDropdownButton">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+        <div id="tag-selection">
+            <label><input type="checkbox" value="hiragana"> Hiragana</label>
+            <label><input type="checkbox" value="katakana"> Katakana</label>
+            <label><input type="checkbox" value="kanji"> Kanji</label>
+            <label><input type="checkbox" value="nouns"> Nouns</label>
+            <label><input type="checkbox" value="verbs"> Verbs</label>
+            <label><input type="checkbox" value="adverbs"> Adverbs</label>
+            <label><input type="checkbox" value="adjective"> Adjectives</label>
+            <label><input type="checkbox" value="pronouns"> Pronouns</label>
+        </div>
+
+        <!-- Flashcard Inputs -->
+        <div id="flashcard-inputs">
+            <input type="text" placeholder="Japanese Word" class="japanese-word">
+            <input type="text" placeholder="English Meaning" class="english-word">
+            <button id="add-card">Add Flashcard</button>
+        </div>
+
+        <div id="flashcard-list"></div>
+
+        <!-- Import/Export Section -->
+        <div id="import-export-container">
+            <input type="text" id="import-code" placeholder="Paste Import Code Here">
+            <button id="copy-code" style="display: none;">Copy Code</button>
+        </div>
+
+        <button id="save-set">Save Set</button>
+    </section>   
+
+    <!-- Load Flashcard Sets -->
+    <section id="load-sets">
+      <h2>Load Flashcard Set</h2>
+      <div id="sets-container"></div>
+    </section>
+
+    <!-- Edit/Delete Flashcard Sets -->
+    <section id="edit-sets">
+      <h2>Edit/Delete Flashcard Sets</h2>
+      <div id="edit-container"></div>
+    </section>
+  </main>
+
+  <!-- Modal for Delete Confirmation -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content">
+      <p>Are you sure you want to delete this flashcard set?</p>
+      <button id="confirm-delete">Yes</button>
+      <button id="cancel-delete">No</button>
+    </div>
+  </div>
+
+  <!-- Snackbar Notification -->
+  <div id="snackbar-container"></div>
+
+  <footer class="page-footer">
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="flashcards.html">FlashCards</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="development.html">JavaScript Development</a></li>
+    </ul>
+    <p>2025 J-Learn.</p>
+  </footer>
+
+</body>
+</html>

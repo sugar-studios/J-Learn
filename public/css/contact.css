@@ -1,0 +1,94 @@
+/* CONTACT PAGE STYLES */
+#contact-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    border: 3px solid #ffc4d1; /* Logo color */
+}
+
+.inline-logo {
+    width: 100px;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#contact-container h2 {
+    font-size: 1.6rem;
+    color: #ffc4d1;
+    margin-bottom: 15px;
+}
+
+#contact-container p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+button {
+    background: rgb(87, 178, 131);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: rgb(67, 148, 111);
+}
+
+/* Error Message Styling */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    display: block;
+    height: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #contact-container {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .inline-logo {
+        width: 80px;
+    }
+}

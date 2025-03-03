@@ -1,0 +1,646 @@
+{
+    "files": [
+        {
+            "name": "wordOfDay.js",
+            "desc": "This script dynamically selects a 'Word of the Day' based on the user's timezone and the current date. The word is randomly chosen using a seeded approach and allows toggling between Kanji, Hiragana, and English meanings.",
+            "blocks": [
+                {
+                    "code": "document.addEventListener('DOMContentLoaded', function () {",
+                    "tooltip": "Waits for the document to fully load before running the script."
+                },
+                {
+                    "code": "fetch('data/wordOfDay.json')\n  .then((response) => response.json())\n  .then((data) => {",
+                    "tooltip": "Fetches the Word of the Day JSON data and converts it into a JavaScript object."
+                },
+                {
+                    "code": "const words = data.words;\nlet timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Phoenix';\nconst today = new Date().toLocaleDateString('en-US', { timeZone });",
+                    "tooltip": "Extracts the list of words and determines the user's timezone and current date."
+                },
+                {
+                    "code": "let seed = 0;\nfor (let i = 0; i < today.length; i++) {\n  seed += today.charCodeAt(i);\n}",
+                    "tooltip": "Generates a unique seed based on the current date, ensuring a different word each day."
+                },
+                {
+                    "code": "const wordIndex = seed % words.length;\nconst word = words[wordIndex];",
+                    "tooltip": "Uses the seed to select a word from the list in a deterministic manner."
+                },
+                {
+                    "code": "const wordBox = document.querySelector('.word-box');\nconst wordKanji = document.getElementById('word-kanji');\nconst wordRomaji = document.getElementById('word-romanji');\nconst wordEnglish = document.getElementById('word-english');\nconst tooltip = document.querySelector('.tooltip');",
+                    "tooltip": "Selects DOM elements where the word details will be displayed."
+                },
+                {
+                    "code": "let inEnglishMode = false;\nlet showingKanji = true;\nlet showingRomaji = true;\nlet tooltipDisabled = false;",
+                    "tooltip": "Initializes state variables for tracking the display mode and tooltip visibility."
+                },
+                {
+                    "code": "wordKanji.textContent = word.kanji;\nwordRomaji.textContent = word.romaji;\nwordEnglish.textContent = `${word.english} (${word.part_of_speech})`;\nwordRomaji.style.display = 'none';\nwordEnglish.style.display = 'none';",
+                    "tooltip": "Sets the default text content and hides the Romaji and English meanings initially."
+                },
+                {
+                    "code": "function updateTooltipText() {\n  tooltip.textContent = inEnglishMode ? 'Click to bring back Kanji' : 'Click to reveal translation';\n}",
+                    "tooltip": "Updates the tooltip message depending on whether English mode is active."
+                },
+                {
+                    "code": "function showTooltip() {\n  if (!tooltipDisabled) {\n    tooltip.style.opacity = '1';\n    tooltip.style.visibility = 'visible';\n  }\n}",
+                    "tooltip": "Displays the tooltip when hovering over the word box."
+                },
+                {
+                    "code": "function hideTooltip() {\n  tooltip.style.opacity = '0';\n  tooltip.style.visibility = 'hidden';\n}",
+                    "tooltip": "Hides the tooltip when the mouse leaves the word box."
+                },
+                {
+                    "code": "function disableTooltip(duration) {\n  tooltipDisabled = true;\n  hideTooltip();\n  setTimeout(() => {\n    tooltipDisabled = false;\n    updateTooltipText();\n  }, duration);\n}",
+                    "tooltip": "Temporarily disables the tooltip for a set duration (used after switching modes)."
+                },
+                {
+                    "code": "function toggleKanjiHiragana() {\n  wordKanji.textContent = showingKanji ? word.hiragana : word.kanji;\n  showingKanji = !showingKanji;\n}",
+                    "tooltip": "Toggles between Kanji and Hiragana versions of the word."
+                },
+                {
+                    "code": "function toggleRomajiHiragana() {\n  wordRomaji.textContent = showingRomaji ? word.hiragana : word.romaji;\n  showingRomaji = !showingRomaji;\n}",
+                    "tooltip": "Toggles between Romaji and Hiragana versions of the word."
+                },
+                {
+                    "code": "function toggleEnglishMode() {\n  if (!inEnglishMode) {\n    wordKanji.style.display = 'none';\n    wordRomaji.style.display = 'block';\n    wordEnglish.style.display = 'block';\n  } else {\n    wordKanji.style.display = 'block';\n    wordRomaji.style.display = 'none';\n    wordEnglish.style.display = 'none';\n  }\n  inEnglishMode = !inEnglishMode;\n  updateTooltipText();\n  disableTooltip(5000);\n}",
+                    "tooltip": "Switches between showing the Kanji word and its English/Romaji translations."
+                },
+                {
+                    "code": "wordKanji.addEventListener('click', toggleKanjiHiragana);\nwordRomaji.addEventListener('click', toggleRomajiHiragana);\nwordBox.addEventListener('click', function(event) {\n  if (!event.target.matches('#word-kanji, #word-romanji')) {\n    toggleEnglishMode();\n  }\n});",
+                    "tooltip": "Adds event listeners to handle user interactions with the word display."
+                },
+                {
+                    "code": "wordBox.addEventListener('mouseenter', showTooltip);\nwordBox.addEventListener('mouseleave', hideTooltip);",
+                    "tooltip": "Shows and hides the tooltip when the user hovers over the word box."
+                },
+                {
+                    "code": "}).catch((error) => console.error('Error loading word of the day:', error));",
+                    "tooltip": "Handles any errors that occur while fetching the JSON data."
+                },
+                {
+                    "code": "});",
+                    "tooltip": "Closes the DOMContentLoaded event listener."
+                }
+            ]
+        },
+        {
+            "name": "menu.js",
+            "desc": "This script manages interactive UI elements, including the navigation menu and the tag selection dropdown. It toggles visibility states when clicked.",
+            "blocks": [
+                {
+                    "code": "document.addEventListener('DOMContentLoaded', function () {",
+                    "tooltip": "Ensures the script runs only after the HTML content has fully loaded."
+                },
+                {
+                    "code": "try {\n    const tagDropdownButton = document.getElementById('tagDropdownButton');\n    const tagSelection = document.getElementById('tag-selection');",
+                    "tooltip": "Attempts to fetch the tag dropdown button and tag selection container from the DOM."
+                },
+                {
+                    "code": "if (tagDropdownButton && tagSelection) {\n    tagDropdownButton.addEventListener('click', function () {\n        tagSelection.classList.toggle('active');\n        tagDropdownButton.classList.toggle('active');\n    });\n}",
+                    "tooltip": "Adds a click event to toggle the tag selection dropdown's visibility."
+                },
+                {
+                    "code": "} catch (error) {\n    console.log('No tag-selection exists');\n}",
+                    "tooltip": "Handles errors gracefully if the tag selection does not exist on the page."
+                },
+                {
+                    "code": "try {\n    const navToggle = document.getElementById('navToggle');\n    const navMenu = document.getElementById('navMenu');",
+                    "tooltip": "Attempts to fetch the navigation toggle button and navigation menu from the DOM."
+                },
+                {
+                    "code": "if (navToggle && navMenu) {\n    navToggle.addEventListener('click', function () {\n        navMenu.classList.toggle('active');\n        navToggle.classList.toggle('active');\n    });\n}",
+                    "tooltip": "Adds a click event to toggle the navigation menu’s visibility."
+                },
+                {
+                    "code": "} catch (error) {\n    console.log('No navigation selection exists');\n}",
+                    "tooltip": "Handles errors gracefully if the navigation menu does not exist on the page."
+                },
+                {
+                    "code": "});",
+                    "tooltip": "Closes the `DOMContentLoaded` event listener."
+                }
+            ]
+        },
+        {
+            "name": "flashcardStorage.js",
+            "desc": "This script handles storing, retrieving, and managing flashcard sets using the browser's localStorage. It ensures that each user has unique flashcard sets by assigning a user-specific ID.",
+            "blocks": [
+                {
+                    "code": "class FlashcardStorage {\n    constructor() {\n        this.userId = this.getUserId();\n    }",
+                    "tooltip": "Initializes the FlashcardStorage class and retrieves or generates a unique user ID."
+                },
+                {
+                    "code": "getUserId() {\n    let userId = localStorage.getItem('flashcardUserId');\n    if (!userId) {\n        userId = 'user_' + Math.random().toString(36).substr(2, 9);\n        localStorage.setItem('flashcardUserId', userId);\n    }\n    return userId;\n}",
+                    "tooltip": "Generates and stores a unique user ID if none exists, ensuring flashcard data is user-specific."
+                },
+                {
+                    "code": "getUserFlashcardSets() {\n    const data = localStorage.getItem(`flashcardSets_${this.userId}`);\n    return data ? JSON.parse(data) : [];\n}",
+                    "tooltip": "Retrieves all saved flashcard sets for the current user from localStorage. Returns an empty array if none exist."
+                },
+                {
+                    "code": "saveFlashcardSet(set, index = null) {\n    let sets = this.getUserFlashcardSets();",
+                    "tooltip": "Fetches the current user's flashcard sets from storage to update or append a new one."
+                },
+                {
+                    "code": "if (index !== null) {\n    sets[index] = set;\n} else {\n    const existingIndex = sets.findIndex(s => s.name === set.name);\n    if (existingIndex !== -1) {\n        sets[existingIndex] = set;\n    } else {\n        sets.push(set);\n    }\n}",
+                    "tooltip": "If an index is provided, updates the set at that position. Otherwise, checks if the set name exists and updates it or adds a new one."
+                },
+                {
+                    "code": "localStorage.setItem(`flashcardSets_${this.userId}`, JSON.stringify(sets));",
+                    "tooltip": "Saves the updated list of flashcard sets back to localStorage."
+                },
+                {
+                    "code": "deleteFlashcardSet(setName) {\n    let sets = this.getUserFlashcardSets();\n    sets = sets.filter(set => set.name !== setName);\n    localStorage.setItem(`flashcardSets_${this.userId}`, JSON.stringify(sets));\n}",
+                    "tooltip": "Removes a flashcard set by filtering out the one with the matching name and updating localStorage."
+                }
+            ]
+        },
+        {
+            "name": "flashcardManager.js",
+            "desc": "This script manages flashcard sets, allowing users to view, edit, and delete sets. It ensures synchronization between the loaded sets and the editable sets.",
+            "blocks": [
+                {
+                    "code": "class FlashcardManager {\n    constructor(storage) {\n        this.storage = storage;\n        this.setsContainer = document.getElementById(\"sets-container\");\n        this.editContainer = document.getElementById(\"edit-container\");\n        this.deleteModal = document.getElementById(\"delete-modal\");\n        this.confirmDeleteButton = document.getElementById(\"confirm-delete\");\n        this.cancelDeleteButton = document.getElementById(\"cancel-delete\");\n        this.deleteIndex = null;\n        this.initialize();\n    }",
+                    "tooltip": "Initializes the FlashcardManager class, connects to the HTML elements, and calls the `initialize()` method."
+                },
+                {
+                    "code": "initialize() {\n    console.log(\"Initializing Flashcard Manager...\");\n    this.confirmDeleteButton.addEventListener(\"click\", () => this.deleteFlashcardSet());\n    this.cancelDeleteButton.addEventListener(\"click\", () => this.cancelDelete());\n    this.renderFlashcardSets();\n}",
+                    "tooltip": "Sets up event listeners for delete confirmation and canceling, then renders the flashcard sets."
+                },
+                {
+                    "code": "renderFlashcardSets() {\n    this.renderFilteredSets(this.storage.getUserFlashcardSets());\n}",
+                    "tooltip": "Fetches the user's flashcard sets and renders them."
+                },
+                {
+                    "code": "renderFilteredSets(sets) {\n    this.setsContainer.innerHTML = \"\";\n    this.editContainer.innerHTML = \"\";",
+                    "tooltip": "Clears the current list of flashcard sets before rendering updated sets."
+                },
+                {
+                    "code": "sets.forEach((set, index) => {\n    const loadSetElement = this.createSetElement(set.name, () => {\n        startFlashcardSession(set);\n    });",
+                    "tooltip": "Iterates over each flashcard set and creates an element that loads the set for study mode when clicked."
+                },
+                {
+                    "code": "const editSetElement = this.createSetElement(set.name, () => {\n    flashcardEditor.loadFlashcardSetForEditing(set, index);\n});",
+                    "tooltip": "Creates an element that allows users to load the set into edit mode."
+                },
+                {
+                    "code": "const deleteBtn = document.createElement(\"span\");\n    deleteBtn.textContent = \"❌\";\n    deleteBtn.classList.add(\"delete-btn\");\n    deleteBtn.addEventListener(\"click\", (event) => {\n        event.stopPropagation();\n        this.deleteIndex = index;\n        this.deleteModal.style.display = \"block\";\n    });",
+                    "tooltip": "Creates a delete button for each flashcard set, preventing event bubbling so that clicking delete doesn’t trigger set loading."
+                },
+                {
+                    "code": "editSetElement.appendChild(deleteBtn);\nthis.setsContainer.appendChild(loadSetElement);\nthis.editContainer.appendChild(editSetElement);",
+                    "tooltip": "Appends the generated flashcard set elements to their respective sections."
+                },
+                {
+                    "code": "createSetElement(name, onClick) {\n    const element = document.createElement(\"div\");\n    element.classList.add(\"set-card\");\n    element.textContent = name;\n    element.addEventListener(\"click\", onClick);\n    return element;\n}",
+                    "tooltip": "Creates a flashcard set element with a click event to either load for study or edit."
+                },
+                {
+                    "code": "deleteFlashcardSet() {\n    if (this.deleteIndex !== null) {\n        const setName = this.storage.getUserFlashcardSets()[this.deleteIndex].name;\n        this.storage.deleteFlashcardSet(setName);\n        this.deleteIndex = null;\n        this.renderFlashcardSets();\n        this.deleteModal.style.display = \"none\";\n    }\n}",
+                    "tooltip": "Deletes the selected flashcard set, updates the displayed sets, and closes the delete confirmation modal."
+                },
+                {
+                    "code": "cancelDelete() {\n    this.deleteModal.style.display = \"none\";\n    this.deleteIndex = null;\n}",
+                    "tooltip": "Cancels the delete action by closing the modal and resetting `deleteIndex`."
+                }
+            ]
+        },
+        {
+            "name": "faq.js",
+            "desc": "Handles the interactive FAQ section, allowing users to expand or collapse answers by clicking on the questions.",
+            "blocks": [
+                {
+                    "code": "document.addEventListener(\"DOMContentLoaded\", () => {",
+                    "tooltip": "Ensures the script runs only after the page content has loaded."
+                },
+                {
+                    "code": "    document.querySelectorAll(\".faq-question\").forEach(button => {",
+                    "tooltip": "Selects all elements with the class 'faq-question' and iterates over them."
+                },
+                {
+                    "code": "        button.addEventListener(\"click\", () => {",
+                    "tooltip": "Adds a click event listener to each FAQ question button."
+                },
+                {
+                    "code": "            button.classList.toggle(\"active\");",
+                    "tooltip": "Toggles the 'active' class to visually indicate the expanded/collapsed state."
+                },
+                {
+                    "code": "            let answer = button.nextElementSibling;",
+                    "tooltip": "Finds the corresponding answer element (next sibling of the clicked question)."
+                },
+                {
+                    "code": "            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + \"px\";",
+                    "tooltip": "Expands or collapses the answer by adjusting its max height dynamically."
+                },
+                {
+                    "code": "        });",
+                    "tooltip": "Closes the click event listener."
+                },
+                {
+                    "code": "    });",
+                    "tooltip": "Closes the loop over all FAQ questions."
+                },
+                {
+                    "code": "});",
+                    "tooltip": "Closes the `DOMContentLoaded` event listener."
+                }
+            ]
+        },
+        {
+            "name": "contact.js",
+            "desc": "Handles the contact form validation and submission using a mailto link. Ensures the user inputs valid data before allowing them to send an email.",
+            "blocks": [
+                {
+                    "code": "document.addEventListener(\"DOMContentLoaded\", () => {",
+                    "tooltip": "Ensures the script executes only after the page content has loaded."
+                },
+                {
+                    "code": "    const contactForm = document.getElementById(\"contact-form\");",
+                    "tooltip": "Selects the contact form element to listen for submissions."
+                },
+                {
+                    "code": "    const emailInput = document.getElementById(\"email\");",
+                    "tooltip": "Gets the email input field for validation."
+                },
+                {
+                    "code": "    const subjectInput = document.getElementById(\"subject\");",
+                    "tooltip": "Gets the subject input field for validation."
+                },
+                {
+                    "code": "    const messageInput = document.getElementById(\"message\");",
+                    "tooltip": "Gets the message textarea input for validation."
+                },
+                {
+                    "code": "    const emailError = document.getElementById(\"email-error\");",
+                    "tooltip": "Selects the error message element for email validation feedback."
+                },
+                {
+                    "code": "    const subjectError = document.getElementById(\"subject-error\");",
+                    "tooltip": "Selects the error message element for subject validation feedback."
+                },
+                {
+                    "code": "    const messageError = document.getElementById(\"message-error\");",
+                    "tooltip": "Selects the error message element for message validation feedback."
+                },
+                {
+                    "code": "    const recipientEmail = \"your_private_email@example.com\";",
+                    "tooltip": "Private recipient email address for sending the messages."
+                },
+                {
+                    "code": "    contactForm.addEventListener(\"submit\", (event) => {",
+                    "tooltip": "Attaches a submit event listener to validate input before sending."
+                },
+                {
+                    "code": "        event.preventDefault();",
+                    "tooltip": "Prevents the default form submission to handle it manually."
+                },
+                {
+                    "code": "        let valid = true;",
+                    "tooltip": "Initializes a flag to track if the form is valid."
+                },
+                {
+                    "code": "        if (!emailInput.value.trim() || !emailInput.value.includes(\"@\")) {",
+                    "tooltip": "Validates the email input, checking if it contains '@'."
+                },
+                {
+                    "code": "            emailError.textContent = \"Please enter a valid email.\";",
+                    "tooltip": "Displays an error message if the email is invalid."
+                },
+                {
+                    "code": "            valid = false;",
+                    "tooltip": "Marks the form as invalid."
+                },
+                {
+                    "code": "        } else {",
+                    "tooltip": "If the email is valid..."
+                },
+                {
+                    "code": "            emailError.textContent = \"\";",
+                    "tooltip": "Clears any previous error message."
+                },
+                {
+                    "code": "        }",
+                    "tooltip": "Closes the email validation check."
+                },
+                {
+                    "code": "        if (!subjectInput.value.trim()) {",
+                    "tooltip": "Ensures the subject input is not empty."
+                },
+                {
+                    "code": "            subjectError.textContent = \"Subject cannot be empty.\";",
+                    "tooltip": "Displays an error if the subject is missing."
+                },
+                {
+                    "code": "            valid = false;",
+                    "tooltip": "Marks the form as invalid."
+                },
+                {
+                    "code": "        } else {",
+                    "tooltip": "If the subject is valid..."
+                },
+                {
+                    "code": "            subjectError.textContent = \"\";",
+                    "tooltip": "Clears any previous subject error."
+                },
+                {
+                    "code": "        }",
+                    "tooltip": "Closes the subject validation check."
+                },
+                {
+                    "code": "        if (!messageInput.value.trim()) {",
+                    "tooltip": "Ensures the message input is not empty."
+                },
+                {
+                    "code": "            messageError.textContent = \"Message cannot be empty.\";",
+                    "tooltip": "Displays an error if the message is missing."
+                },
+                {
+                    "code": "            valid = false;",
+                    "tooltip": "Marks the form as invalid."
+                },
+                {
+                    "code": "        } else {",
+                    "tooltip": "If the message is valid..."
+                },
+                {
+                    "code": "            messageError.textContent = \"\";",
+                    "tooltip": "Clears any previous message error."
+                },
+                {
+                    "code": "        }",
+                    "tooltip": "Closes the message validation check."
+                },
+                {
+                    "code": "        if (valid) {",
+                    "tooltip": "If all fields are valid, proceed with sending the email."
+                },
+                {
+                    "code": "            sendEmail();",
+                    "tooltip": "Calls the function to send the email."
+                },
+                {
+                    "code": "        }",
+                    "tooltip": "Closes the final validation check."
+                },
+                {
+                    "code": "    });",
+                    "tooltip": "Closes the form submission event listener."
+                },
+                {
+                    "code": "    function sendEmail() {",
+                    "tooltip": "Encodes and constructs a mailto link to send the email."
+                },
+                {
+                    "code": "        const userEmail = encodeURIComponent(emailInput.value.trim());",
+                    "tooltip": "Encodes the user's email input to prevent errors in the mailto link."
+                },
+                {
+                    "code": "        const subject = encodeURIComponent(subjectInput.value.trim());",
+                    "tooltip": "Encodes the subject input to prevent formatting issues."
+                },
+                {
+                    "code": "        const message = encodeURIComponent(messageInput.value.trim());",
+                    "tooltip": "Encodes the message input to properly format the email content."
+                },
+                {
+                    "code": "        const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=From: ${userEmail}%0D%0A%0D%0A${message}`;",
+                    "tooltip": "Constructs the mailto link with the recipient email, subject, and message."
+                },
+                {
+                    "code": "        window.location.href = mailtoLink;",
+                    "tooltip": "Opens the user's default email client with the pre-filled email details."
+                },
+                {
+                    "code": "    }",
+                    "tooltip": "Closes the sendEmail function."
+                },
+                {
+                    "code": "});",
+                    "tooltip": "Closes the `DOMContentLoaded` event listener."
+                }
+            ]
+        },
+        {
+            "name": "development.js",
+            "desc": "This script dynamically loads and formats JavaScript documentation, including collapsible code blocks with nested tooltips and syntax highlighting.",
+            "blocks": [
+                {
+                    "code": "document.addEventListener(\"DOMContentLoaded\", () => {",
+                    "tooltip": "Ensures the script runs only after the page content has fully loaded."
+                },
+                {
+                    "code": "    fetch(\"data/code.json\")",
+                    "tooltip": "Fetches the JSON file containing the documentation data."
+                },
+                {
+                    "code": "        .then(response => response.json())",
+                    "tooltip": "Parses the JSON response into a JavaScript object."
+                },
+                {
+                    "code": "        .then(data => {",
+                    "tooltip": "Processes the JSON data and dynamically generates HTML elements."
+                },
+                {
+                    "code": "            const fileList = document.getElementById(\"file-list\");",
+                    "tooltip": "Selects the container element where file documentation will be inserted."
+                },
+                {
+                    "code": "            let activeTooltip = null;",
+                    "tooltip": "Keeps track of the currently active tooltip."
+                },
+                {
+                    "code": "            data.files.forEach(file => {",
+                    "tooltip": "Loops through each file entry in the JSON data."
+                },
+                {
+                    "code": "                const fileEntry = document.createElement(\"div\");",
+                    "tooltip": "Creates a new div to represent a file entry."
+                },
+                {
+                    "code": "                fileEntry.classList.add(\"file-entry\");",
+                    "tooltip": "Adds a CSS class for styling the file entry."
+                },
+                {
+                    "code": "                const fileQuestion = document.createElement(\"button\");",
+                    "tooltip": "Creates a collapsible button for the file title."
+                },
+                {
+                    "code": "                fileQuestion.classList.add(\"file-question\");",
+                    "tooltip": "Adds a CSS class for styling the collapsible button."
+                },
+                {
+                    "code": "                fileQuestion.textContent = file.name;",
+                    "tooltip": "Sets the button's text to the file name."
+                },
+                {
+                    "code": "                const fileAnswer = document.createElement(\"div\");",
+                    "tooltip": "Creates a hidden container that will hold the file description and code."
+                },
+                {
+                    "code": "                fileAnswer.classList.add(\"file-answer\");",
+                    "tooltip": "Adds a CSS class for styling the hidden section."
+                },
+                {
+                    "code": "                const fileDescription = document.createElement(\"p\");",
+                    "tooltip": "Creates a paragraph element for the file description."
+                },
+                {
+                    "code": "                fileDescription.textContent = file.desc;",
+                    "tooltip": "Sets the paragraph text to the file description from JSON."
+                },
+                {
+                    "code": "                fileAnswer.appendChild(fileDescription);",
+                    "tooltip": "Appends the description paragraph inside the collapsible section."
+                },
+                {
+                    "code": "                const codeContainer = document.createElement(\"pre\");",
+                    "tooltip": "Creates a preformatted block for displaying the code."
+                },
+                {
+                    "code": "                codeContainer.classList.add(\"code-container\");",
+                    "tooltip": "Adds a CSS class for styling the code block."
+                },
+                {
+                    "code": "                file.blocks.forEach((block, index) => {",
+                    "tooltip": "Iterates over each block of code within a file."
+                },
+                {
+                    "code": "                    const blockWrapper = document.createElement(\"div\");",
+                    "tooltip": "Wraps each code block and its tooltip."
+                },
+                {
+                    "code": "                    blockWrapper.classList.add(\"code-block-wrapper\");",
+                    "tooltip": "Adds a CSS class for consistent formatting."
+                },
+                {
+                    "code": "                    const blockElement = document.createElement(\"span\");",
+                    "tooltip": "Creates an inline element for a highlighted code block."
+                },
+                {
+                    "code": "                    blockElement.classList.add(\"code-block\");",
+                    "tooltip": "Adds a CSS class for syntax highlighting."
+                },
+                {
+                    "code": "                    blockElement.innerHTML = highlightCode(block.code);",
+                    "tooltip": "Applies syntax highlighting using the `highlightCode()` function."
+                },
+                {
+                    "code": "                    const tooltipSection = document.createElement(\"div\");",
+                    "tooltip": "Creates a hidden tooltip section for additional explanations."
+                },
+                {
+                    "code": "                    tooltipSection.classList.add(\"tooltip-section\");",
+                    "tooltip": "Adds a CSS class for consistent tooltip styling."
+                },
+                {
+                    "code": "                    tooltipSection.textContent = block.tooltip;",
+                    "tooltip": "Sets the tooltip content to the explanation from JSON."
+                },
+                {
+                    "code": "                    tooltipSection.style.height = \"0\";",
+                    "tooltip": "Starts with the tooltip collapsed."
+                },
+                {
+                    "code": "                    blockElement.addEventListener(\"click\", (event) => {",
+                    "tooltip": "Toggles the tooltip section when clicking a code block."
+                },
+                {
+                    "code": "                        event.stopPropagation();",
+                    "tooltip": "Prevents event bubbling to avoid unintended collapses."
+                },
+                {
+                    "code": "                        if (activeTooltip && activeTooltip !== tooltipSection) {",
+                    "tooltip": "Closes the previous tooltip before opening a new one."
+                },
+                {
+                    "code": "                            closeTooltip(activeTooltip);",
+                    "tooltip": "Closes the currently active tooltip."
+                },
+                {
+                    "code": "                        }",
+                    "tooltip": "Ends the check for an active tooltip."
+                },
+                {
+                    "code": "                        if (tooltipSection.style.height === \"0px\" || tooltipSection.style.height === \"\") {",
+                    "tooltip": "Expands the tooltip section if it's currently hidden."
+                },
+                {
+                    "code": "                            openTooltip(tooltipSection, blockWrapper);",
+                    "tooltip": "Calls the function to expand the tooltip."
+                },
+                {
+                    "code": "                        } else {",
+                    "tooltip": "Otherwise, if the tooltip is open..."
+                },
+                {
+                    "code": "                            closeTooltip(tooltipSection);",
+                    "tooltip": "Calls the function to collapse the tooltip."
+                },
+                {
+                    "code": "                        }",
+                    "tooltip": "Ends the tooltip toggle condition."
+                },
+                {
+                    "code": "                        activeTooltip = tooltipSection.style.height !== \"0px\" ? tooltipSection : null;",
+                    "tooltip": "Updates the active tooltip reference."
+                },
+                {
+                    "code": "                    });",
+                    "tooltip": "Closes the click event listener."
+                },
+                {
+                    "code": "                });",
+                    "tooltip": "Closes the loop over code blocks."
+                },
+                {
+                    "code": "                fileAnswer.appendChild(codeContainer);",
+                    "tooltip": "Places the formatted code block inside the collapsible section."
+                },
+                {
+                    "code": "            });",
+                    "tooltip": "Closes the loop over all files."
+                },
+                {
+                    "code": "        });",
+                    "tooltip": "Closes the JSON data processing function."
+                },
+                {
+                    "code": "});",
+                    "tooltip": "Closes the event listener for page load."
+                },
+                {
+                    "code": "function highlightCode(code) {",
+                    "tooltip": "Defines the function that processes and formats JavaScript code."
+                },
+                {
+                    "code": "    return code",
+                    "tooltip": "Returns the formatted code after applying transformations."
+                },
+                {
+                    "code": "        .replace(/\"(.*?)\"/g, '<span class=\"highlight string\">\"$1\"</span>')",
+                    "tooltip": "Highlights string literals."
+                },
+                {
+                    "code": "        .replace(/\\b(function|return|if|else|let|const|var|for|while|switch|case|break|default|new|class|extends|super|import|export|try|catch|finally|throw|typeof|instanceof|async|await)\\b/g, '<span class=\"highlight keyword\">$1</span>')",
+                    "tooltip": "Highlights JavaScript reserved keywords."
+                },
+                {
+                    "code": "        .replace(/\\b(console|document|window|fetch|Math)\\b/g, '<span class=\"highlight function\">$1</span>')",
+                    "tooltip": "Highlights built-in JavaScript objects."
+                },
+                {
+                    "code": "        .replace(/\\b([0-9]+)\\b/g, '<span class=\"highlight number\">$1</span>')",
+                    "tooltip": "Highlights numbers."
+                },
+                {
+                    "code": "        .replace(/\\/\\/(.*)/g, '<span class=\"highlight comment\">//$1</span>');",
+                    "tooltip": "Highlights comments."
+                },
+                {
+                    "code": "}",
+                    "tooltip": "Closes the highlight function."
+                }
+            ]
+        }                
+    ]
+}

@@ -1,0 +1,216 @@
+/* ==============
+    WELCOME BOX
+=============== */
+#welcome-box {
+    text-align: center;
+    background: rgb(87, 178, 131);
+    color: white;
+    padding: 2rem;
+    margin: 5vh auto;
+    width: 60%;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(87, 178, 131, 0.5);
+    font-size: 1.5rem;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+#welcome-box span {
+    color: #ffc4d1;
+    font-weight: bold;
+}
+
+/* ==============
+    HERO SECTION
+=============== */
+#word-of-the-day-hero {
+    height: 70vh;
+    width: 70%;
+    border-radius: 10px;
+    display: flex;
+    margin: 5vh auto;;
+    justify-content: center;
+    align-items: center;
+    background: url("../media/index/japan-day.png") center/cover no-repeat;
+    color: white;
+    text-align: center;
+}
+
+.word-box {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 196, 209, 0.8);
+}
+
+.tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px; /* Positioned lower */
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: translate(-50%, 10px);
+}
+
+/* Tooltip Arrow */
+.tooltip::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* Adjust this to position the arrow */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+}
+
+.word-box:hover .tooltip {
+    opacity: .7;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.word-box h1 {
+    font-size: 5rem;
+    color: #ffc4d1;
+    margin: 10px 0;
+}
+
+.word-box h3 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.word-box p {
+    font-size: 1.2rem;
+}
+
+/* ==============
+    MAIN CONTENT LAYOUT
+=============== */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem;
+}
+
+/* Section Styling */
+.info-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 90%;
+    max-width: 1200px;
+    flex-direction: row;
+}
+
+.info-section article {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 60vh;
+    height: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific Section Positioning */
+#faq-link {
+    margin: 15vh 60% 0 20%;
+}
+
+#examples, #get-started {
+    margin: 15vh 20% 0 60%;
+}
+
+/* Images in Sections */
+.info-section aside img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 5px;
+}
+
+section h2 {
+    color: rgb(87, 178, 131);
+    margin-bottom: 0.5em;
+}
+
+section p {
+    font-size: 1.2rem;
+    line-height: 1.8em;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    aside {
+        display: none;
+    }
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    background: rgb(87, 178, 131);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background: rgb(101, 186, 142);
+}
+
+.btn2 {
+    display: inline-block;
+    background: #ffc4d1;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    border-color: #ffc4d1;
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn2:hover {
+    background: #fdd3dc;
+}
+
+
+/* ==============
+    ANIMATIONS
+=============== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

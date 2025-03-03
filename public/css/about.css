@@ -1,0 +1,99 @@
+/* ABOUT PAGE STYLES */
+#about-container {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    border: 3px solid #ffc4d1; /* Logo color */
+}
+
+.logo-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-title img {
+    width: 180px;
+    height: auto;
+}
+
+#about-container h2 {
+    font-size: 1.6rem;
+    color: #ffc4d1;
+    margin-top: 25px;
+}
+
+#about-container .tagline {
+    font-size: 1.2rem;
+    color: #777;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+#about-container p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+#about-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#about-container ul li {
+    font-size: 1.1rem;
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.bullet-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.inline-logo {
+    width: 100px;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+a {
+    color: rgb(87, 178, 131);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #about-container {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .logo-title img {
+        width: 140px;
+    }
+
+    .inline-logo {
+        width: 80px;
+    }
+
+    #about-container h2 {
+        font-size: 1.4rem;
+    }
+
+    .bullet-icon {
+        width: 20px;
+        height: 20px;
+    }
+}

@@ -1,0 +1,117 @@
+.development-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.inline-logo {
+    width: 3em;
+    vertical-align: middle;
+}
+
+.dev-item-container {
+    width: 900px;
+    margin: auto;
+}
+
+.file-entry {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.file-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.file-question::after {
+    content: " +";
+    float: right;
+    font-weight: bold;
+}
+
+.file-question.active::after {
+    content: " -";
+}
+
+.file-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 10px;
+}
+
+/* Code Block Container */
+pre {
+    background: #282c34;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    font-family: monospace;
+    line-height: 1.5;
+}
+
+.code-container {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each code block + tooltip wrapper */
+.code-block-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Code block styles */
+.code-block {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+/* Glow effect on hover */
+.code-block-wrapper.glow .code-block {
+    background: rgba(255, 255, 120, 0.2);
+    border-radius: 5px;
+}
+
+/* Tooltip Section (Initially Hidden) */
+.tooltip-section {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 0;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    display: none;
+    height: 0;
+    transition: height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+/* Push Down Effect */
+.code-block-wrapper.expanded {
+    margin-bottom: 20px; /* Creates space for the expanded tooltip */
+}
+
+/* Custom Syntax Highlighting */
+.highlight.keyword { color: #c678dd; font-weight: bold; } /* Purple */
+.highlight.string { color: #98c379; } /* Green */
+.highlight.function { color: #61afef; } /* Blue */
+.highlight.variable { color: #e5c07b; } /* Yellow */
+.highlight.comment { color: #5c6370; font-style: italic; } /* Gray */
+.highlight.number { color: #d19a66; } /* Orange */
