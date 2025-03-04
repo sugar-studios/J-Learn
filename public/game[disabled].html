@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/games.css">
-  <script src="js/games/hiraganaGame.js" defer></script>
-  <script src="js/games.js"></script>
+  <script src="js/games.js" defer></script>
 </head>
 <body>
 
@@ -41,14 +40,12 @@
   <!-- Main Content -->
   <main id="games-container">
     <section class="game-selection">
-      <div class="game-box" id="hiragana-game" onclick="startHiraganaGame()">Hiragana Table Fill</div>
-      <div class="game-box" id="katakana-game">Katakana Table Fill</div>
+      <div class="game-box">Hiragana Table Fill</div>
+      <div class="game-box">Katakana Table Fill</div>
     </section>
 
     <section class="game-display">
-      <div class="game-area" id="gameArea">
-        <p>No game here</p>
-      </div>
+      <iframe id="gameFrame" src="" class="game-area"></iframe>
     </section>
   </main>
 
@@ -63,5 +60,6 @@
     </ul>
     <p>2025 J-Learn.</p>
   </footer>
+
 </body>
 </html>

@@ -1,0 +1,228 @@
+/* ========================
+    GAME SCREEN LAYOUT
+======================== */
+.game-board {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+/* Timer */
+#gameTimer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #444;
+}
+
+/* ========================
+    HIRAGANA TABLE
+======================== */
+.hiragana-table {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    width: 90%;
+    max-width: 420px;
+    padding: 10px;
+}
+
+.hiragana-cell {
+    aspect-ratio: 1;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+/* Fixed Pre-Filled Cells */
+.fixed-cell {
+    background: #d3f8d3;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* Correct Placement Animation */
+.correct-placement {
+    animation: correctFlash 0.1s ease-in-out;
+}
+
+/*
+@keyframes correctFlash {
+    0% { background: rgb(144, 238, 144); }
+    100% { background: white; }
+}
+*/
+/* Wrong Placement Animation */
+.wrong {
+    background: red;
+    animation: shake 0.3s ease-in-out;
+}
+
+/*
+@keyframes shake {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}*/
+
+/* ✅ Table flashes green on correct answer */
+.table-correct {
+    animation: flashGreen 0.2s ease-in-out;
+}
+
+@keyframes flashGreen {
+    0% { background-color: #b4ffb4; }
+    100% { background-color: transparent; }
+}
+
+/* ❌ Table shakes red on wrong answer */
+.table-wrong {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(-5px); background-color: #ffb4b4;}
+    25% { transform: translateX(5px); }
+    50% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+    100% { transform: translateX(0); background-color: transparent;}
+}
+
+
+/* ========================
+    CHARACTER SELECTION
+======================== */
+.character-pool {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 90%;
+    overflow: hidden;
+}
+
+/* Character Buttons */
+.char-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    background: #ffc4d1;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* Highlight Selected Character */
+.char-btn.selected {
+    background: rgb(87, 178, 131);
+    transform: scale(1.1);
+}
+
+/* "Active Character" Display (Medium & Above) */
+#activeCharacter {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: #ffc4d1;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ========================
+    BUTTON STYLES
+======================== */
+.quit-btn {
+    padding: 10px;
+    background: red;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.quit-btn:hover {
+    background: darkred;
+}
+
+/* ========================
+    MAIN MENU & END SCREEN
+======================== */
+.game-menu, .game-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.game-menu h2, .game-results h2 {
+    font-size: 2rem;
+    color: #444;
+}
+
+.game-menu button, .game-results button, .how-to-play button {
+    width: 80%;
+    max-width: 250px;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: rgb(87, 178, 131);
+    color: white;
+    transition: background 0.3s ease-in-out;
+}
+
+.game-menu button:hover, .game-results button:hover, .how-to-play button:hover {
+    background: rgb(101, 186, 142);
+}
+
+/* ========================
+    HOW TO PLAY SCREEN
+======================== */
+.how-to-play {
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    text-align: left;
+}
+
+.how-to-play p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* ========================
+    RESPONSIVE DESIGN
+======================== */
+@media (max-width: 768px) {
+    .hiragana-table {
+        max-width: 350px;
+    }
+    
+    .char-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+    
+    .quit-btn {
+        font-size: 1rem;
+    }
+}

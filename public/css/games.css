@@ -1,6 +1,6 @@
-/* ==============
-    GAMES PAGE STYLES
-=============== */
+/* ========================
+    GENERAL STYLES
+======================== */
 #games-container {
     display: flex;
     flex-direction: column;
@@ -9,7 +9,9 @@
     gap: 2rem;
 }
 
-/* Game Selection Row */
+/* ========================
+    GAME SELECTION ROW
+======================== */
 .game-selection {
     display: flex;
     justify-content: center;
@@ -40,61 +42,45 @@
     transform: scale(1.05);
 }
 
-/* Responsive Design */
+/* ========================
+    FIXED GAME AREA SIZE
+======================== */
+.game-display {
+    width: 100%;
+    max-width: 650px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #ffc4d1;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.game-area {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ========================
+    RESPONSIVE DESIGN
+======================== */
 @media (max-width: 768px) {
     .game-selection {
         flex-direction: column;
         align-items: center;
     }
-
+    
     .game-box {
         width: 80%;
         height: 150px;
     }
-}
 
-
-
-
-/* games.css */
-#game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-#hiragana-table {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 5px;
-    padding: 10px;
-}
-
-.table-cell {
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.char-button {
-    margin: 5px;
-    padding: 5px;
-}
-
-.error {
-    background-color: red;
-    animation: shake 0.2s ease-in-out;
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    .game-display {
+        width: 90%;
+        height: 500px;
+    }
 }

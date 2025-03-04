@@ -1,194 +1,229 @@
-// js/games/hiraganaGame.js
+document.addEventListener("DOMContentLoaded", () => {
+    const gameArea = document.getElementById("gameArea");
 
-class HiraganaGame {
-    constructor() {
-        this.HIRAGANA = [
-            "あ", "い", "う", "え", "お",
-            "か", "き", "く", "け", "こ",
-            "さ", "し", "す", "せ", "そ",
-            "た", "ち", "つ", "て", "と",
-            "な", "に", "ぬ", "ね", "の",
-            "は", "ひ", "ふ", "へ", "ほ",
-            "ま", "み", "む", "め", "も",
-            "や", "ゆ", "よ",
-            "ら", "り", "る", "れ", "ろ",
-            "わ", "を", "ん"
-        ];
-        this.selectedDifficulty = "easy";
-        this.availableChars = [...this.HIRAGANA];
-        this.placedChars = {};
-        this.mistakes = 0;
-        this.startTime = null;
-        this.timer = null;
-        this.timeLimit = 75; // 1:15 for Sensei mode
-        this.initializeGame();
-    }
+    const hiraganaTable = [
+        ["わ", "ら", "や", "ま", "は", "な", "た", "さ", "か", "あ"],
+        ["", "り", "", "み", "ひ", "に", "ち", "し", "き", "い"],
+        ["を", "る", "ゆ", "む", "ふ", "ぬ", "つ", "す", "く", "う"],
+        ["", "れ", "", "め", "へ", "ね", "て", "せ", "け", "え"],
+        ["ん", "ろ", "よ", "も", "ほ", "の", "と", "そ", "こ", "お"]
+    ];
 
-    initializeGame() {
-        const gameArea = document.getElementById("gameArea");
+    let selectedDifficulty, startTime, gameInterval, availableChars = [], selectedChar, mistakeCount, timer;
 
+    function startHiraganaGame() {
         gameArea.innerHTML = `
-            <div id="game-container">
-                <div id="difficulty-selector">
-                    <button data-difficulty="easy">Easy</button>
-                    <button data-difficulty="medium">Medium</button>
-                    <button data-difficulty="hard">Hard</button>
-                    <button data-difficulty="sensei">Sensei</button>
-                </div>
-                <div id="hiragana-table"></div>
-                <div id="char-inventory"></div>
-                <div id="game-footer"><p id="timer-display">Time: 0s</p></div>
+            <div class="game-menu">
+                <h2>Hiragana Table Fill</h2>
+                <p>Select Difficulty</p>
+                <button id="easy">Easy</button>
+                <button id="medium">Medium</button>
+                <button id="hard">Hard</button>
+                <button id="sensei">Sensei</button>
+                <button id="howToPlay">How to Play</button>
+                <button id="quit">Quit</button>
             </div>
         `;
 
-        document.querySelectorAll("#difficulty-selector button").forEach(button => {
-            button.onclick = () => this.startGame(button.dataset.difficulty);
-        });
-
-        this.startGame("easy");
+        document.getElementById("easy").addEventListener("click", () => startGame("easy"));
+        document.getElementById("medium").addEventListener("click", () => startGame("medium"));
+        document.getElementById("hard").addEventListener("click", () => startGame("hard"));
+        document.getElementById("sensei").addEventListener("click", () => startGame("sensei"));
+        document.getElementById("howToPlay").addEventListener("click", howToPlay);
+        document.getElementById("quit").addEventListener("click", quitGame);
     }
 
-    startGame(difficulty) {
-        this.selectedDifficulty = difficulty;
-        this.availableChars = [...this.HIRAGANA];
-        this.placedChars = {};
-        this.mistakes = 0;
-        this.startTime = Date.now();
-        if (this.timer) clearInterval(this.timer);
+    function howToPlay() {
+        gameArea.innerHTML = `
+            <div class="how-to-play">
+                <h2>How to Play</h2>
+                <p>Fill the correct hiragana characters into the table.</p>
+                <p><strong>Easy:</strong> 20% is pre-filled. Select characters and place them.</p>
+                <p><strong>Medium:</strong> 20% is pre-filled. You must place the active character.</p>
+                <p><strong>Hard:</strong> The board is empty. You must place the active character.</p>
+                <p><strong>Sensei:</strong> Same as Hard, but you have 1:15 minutes. Mistakes remove 5 seconds.</p>
+                <button id="backToMenu">Back to Menu</button>
+            </div>
+        `;
 
-        const timerDisplay = document.getElementById("timer-display");
-        this.timer = setInterval(() => {
-            let elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
-
-            if (this.selectedDifficulty === "sensei") {
-                elapsedTime = this.timeLimit - elapsedTime;
-                if (elapsedTime <= 0) {
-                    clearInterval(this.timer);
-                    alert("Time's up! You failed the challenge.");
-                    return;
-                }
-            }
-
-            timerDisplay.innerText = `Time: ${elapsedTime}s`;
-        }, 1000);
-
-        this.createTable();
-        this.initializeCharacters();
+        document.getElementById("backToMenu").addEventListener("click", startHiraganaGame);
     }
 
-    createTable() {
-        const table = document.getElementById("hiragana-table");
-        table.innerHTML = "";
-        for (let i = 0; i < this.HIRAGANA.length; i++) {
-            let cell = document.createElement("div");
-            cell.classList.add("table-cell");
-            cell.dataset.index = i;
-            cell.onclick = () => this.removeCharacter(cell);
-            table.appendChild(cell);
-        }
-    }
+    function startGame(difficulty) {
+        selectedDifficulty = difficulty;
+        availableChars = [];
+        mistakeCount = 0;
+        selectedChar = null;
 
-    initializeCharacters() {
-        const inventory = document.getElementById("char-inventory");
-        inventory.innerHTML = "";
-        let fillAmount = this.selectedDifficulty === "hard" || this.selectedDifficulty === "sensei" ? 0 : 20;
-        let fillIndexes = new Set();
+        gameArea.innerHTML = `
+            <div class="game-board">
+                <div id="gameTimer">Time: 00:00</div>
+                <div id="activeCharacter">Active Character: -</div>
+                <div class="hiragana-table" id="hiraganaTable"></div>
+                <div class="character-pool" id="characterPool"></div>
+            </div>
+            <button id="quitBtn" class="quit-btn">Quit</button>
+        `;
 
-        while (fillIndexes.size < Math.floor(this.HIRAGANA.length * fillAmount / 100)) {
-            fillIndexes.add(Math.floor(Math.random() * this.HIRAGANA.length));
-        }
+        document.getElementById("quitBtn").addEventListener("click", startHiraganaGame);
 
-        for (let index of fillIndexes) {
-            let cell = document.querySelector(`.table-cell[data-index="${index}"]`);
-            cell.innerText = this.HIRAGANA[index];
-            this.placedChars[index] = this.HIRAGANA[index];
-            this.availableChars = this.availableChars.filter(char => char !== this.HIRAGANA[index]);
-        }
+        generateHiraganaTable(difficulty);
 
-        if (this.selectedDifficulty === "easy") {
-            for (let char of this.availableChars) {
-                let button = document.createElement("button");
-                button.innerText = char;
-                button.classList.add("char-button");
-                button.onclick = () => this.selectCharacter(char);
-                inventory.appendChild(button);
-            }
+        if (difficulty === "easy") {
+            setTimeout(generateCharacterPool, 10);
         } else {
-            this.provideNextCharacter();
+            setTimeout(setNextActiveCharacter, 10);
+        }
+
+        startTime = Date.now();
+        updateTimer();
+
+        if (difficulty === "sensei") {
+            timer = 75;
+            gameInterval = setInterval(() => {
+                timer--;
+                updateTimer();
+                if (timer <= 0) {
+                    endGame("fail");
+                }
+            }, 1000);
+        } else {
+            gameInterval = setInterval(updateTimer, 1000);
         }
     }
 
-    selectCharacter(char) {
-        let selectedCell = document.querySelector(".table-cell.selected");
-        if (selectedCell) {
-            selectedCell.innerText = char;
-            this.placedChars[selectedCell.dataset.index] = char;
-            document.querySelector(`button:contains('${char}')`).remove();
-            selectedCell.classList.remove("selected");
+    function generateHiraganaTable(difficulty) {
+        const table = document.getElementById("hiraganaTable");
+        table.innerHTML = "";
+        let filledSpots = 0;
+        let totalCells = 50;
+
+        for (let i = 0; i < hiraganaTable.length; i++) {
+            for (let j = 0; j < hiraganaTable[i].length; j++) {
+                const char = hiraganaTable[i][j];
+                const cell = document.createElement("div");
+                cell.classList.add("hiragana-cell");
+                cell.dataset.index = `${i}-${j}`;
+
+                if (char !== "") {
+                    if (difficulty === "easy" || difficulty === "medium") {
+                        if (Math.random() < 0.2 && filledSpots < totalCells * 0.2) {
+                            cell.textContent = char;
+                            cell.classList.add("fixed-cell");
+                            filledSpots++;
+                        } else {
+                            availableChars.push(char);
+                        }
+                    } else {
+                        availableChars.push(char);
+                    }
+                    cell.addEventListener("click", () => placeCharacter(cell));
+                }
+                table.appendChild(cell);
+            }
         }
     }
 
-    removeCharacter(cell) {
-        if (this.placedChars[cell.dataset.index]) {
-            let char = this.placedChars[cell.dataset.index];
-            delete this.placedChars[cell.dataset.index];
-            cell.innerText = "";
-            let button = document.createElement("button");
-            button.innerText = char;
-            button.classList.add("char-button");
-            button.onclick = () => this.selectCharacter(char);
-            document.getElementById("char-inventory").appendChild(button);
-        }
+    function generateCharacterPool() {
+        const pool = document.getElementById("characterPool");
+        pool.innerHTML = "";
+
+        availableChars.forEach(char => {
+            const charBtn = document.createElement("button");
+            charBtn.classList.add("char-btn");
+            charBtn.textContent = char;
+            charBtn.addEventListener("click", () => selectCharacter(char, charBtn));
+            pool.appendChild(charBtn);
+        });
     }
 
-    provideNextCharacter() {
-        if (this.availableChars.length === 0) {
-            clearInterval(this.timer);
-            alert(`You completed the table in ${document.getElementById("timer-display").innerText}!`);
+    function selectCharacter(char, btn) {
+        document.querySelectorAll(".char-btn").forEach(btn => btn.classList.remove("selected"));
+        selectedChar = char;
+        btn.classList.add("selected");
+    }
+
+    function checkCompletion() {
+        const totalCells = document.querySelectorAll(".hiragana-cell").length;
+        const filledCells = document.querySelectorAll(".hiragana-cell:not(:empty)").length;
+    
+        if (filledCells === totalCells) {
+            endGame("success");
+        }
+    }
+    
+
+    function setNextActiveCharacter() {
+        if (availableChars.length === 0) {
+            document.getElementById("activeCharacter").textContent = "All characters placed!";
             return;
         }
+    
+        // ✅ Randomly select a new character
+        const randomIndex = Math.floor(Math.random() * availableChars.length);
+        selectedChar = availableChars.splice(randomIndex, 1)[0];
+    
+        // ✅ Update UI with the new active character
+        document.getElementById("activeCharacter").textContent = `Active Character: ${selectedChar}`;
+    }
+    
 
-        let char = this.availableChars.pop();
-        let prompt = document.createElement("p");
-        prompt.innerText = `Place: ${char}`;
-        document.getElementById("char-inventory").innerHTML = "";
-        document.getElementById("char-inventory").appendChild(prompt);
+    function placeCharacter(cell) {
+        if (!selectedChar || cell.textContent) return; // Prevent placing over existing characters
+    
+        const [i, j] = cell.dataset.index.split("-").map(Number);
+        const correctChar = hiraganaTable[i][j];
+        const table = document.getElementById("hiraganaTable");
+    
+        if (selectedChar === correctChar) {
+            // ✅ Correct placement
+            cell.textContent = correctChar;
+            table.classList.add("table-correct"); // Whole table flashes green
+            setTimeout(() => table.classList.remove("table-correct"), 100);
+    
+            // ✅ Remove character from the inventory in easy mode
+            if (selectedDifficulty === "easy") {
+                removeCharacterFromInventory(selectedChar);
+            }
+    
+            // ✅ Check if the game is complete
+            setTimeout(checkCompletion, 100);
+    
+            // ✅ Update active character
+            if (selectedDifficulty !== "easy") {
+                setTimeout(setNextActiveCharacter, 200);
+            }
+        } else {
+            // ❌ Incorrect placement
+            table.classList.add("table-wrong"); // Whole table shakes red
+            setTimeout(() => table.classList.remove("table-wrong"), 500);
+    
+            // ✅ Apply mistake penalty
+            mistakeCount += (selectedDifficulty === "hard") ? 5 : 2;
+            if (selectedDifficulty === "sensei") mistakeCount -= 5;
+        }
+    }        
 
-        document.querySelectorAll(".table-cell").forEach(cell => {
-            cell.onclick = () => this.checkPlacement(cell, char);
+    function removeCharacterFromInventory(char) {
+        const charButtons = document.querySelectorAll(".char-btn");
+        charButtons.forEach(btn => {
+            if (btn.textContent === char) {
+                btn.remove();
+            }
         });
     }
 
-    checkPlacement(cell, char) {
-        if (this.HIRAGANA[cell.dataset.index] === char) {
-            cell.innerText = char;
-            this.placedChars[cell.dataset.index] = char;
+    function updateTimer() {
+        const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
+        const seconds = String(elapsedTime % 60).padStart(2, '0');
 
-            if (this.selectedDifficulty === "sensei") {
-                this.timeLimit += 5; // Sensei mode bonus
-            }
-
-            this.provideNextCharacter();
-        } else {
-            this.mistakes++;
-
-            if (this.selectedDifficulty === "sensei") {
-                this.timeLimit -= 5;
-            } else if (this.selectedDifficulty === "hard") {
-                this.addTime(5);
-            } else {
-                this.addTime(2);
-            }
-
-            cell.classList.add("error");
-            setTimeout(() => cell.classList.remove("error"), 500);
-        }
+        document.getElementById("gameTimer").textContent = `Time: ${minutes}:${seconds}`;
     }
 
-    addTime(seconds) {
-        this.startTime -= seconds * 1000;
+    function quitGame() {
+        gameArea.innerHTML = `<p>No game here</p>`;
     }
-}
 
-// Initialize when loaded
-new HiraganaGame();
+    startHiraganaGame();
+});

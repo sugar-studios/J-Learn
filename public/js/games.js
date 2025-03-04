@@ -1,32 +1,17 @@
-// js/games.js
+document.addEventListener("DOMContentLoaded", () => {
+    const gameFrame = document.getElementById("gameFrame");
 
-const gameArea = document.getElementById("gameArea");
-
-// Mapping game names to their respective scripts
-const games = {
-    "hiragana-game": "js/games/hiraganaGame.js",
-    // Future games can be added here
-};
-
-// Function to load the selected game
-function startGame(gameId) {
-    gameArea.innerHTML = "<p>Loading...</p>"; // Temporary loading text
-
-    const script = document.createElement("script");
-    script.src = games[gameId];
-    script.onload = () => {
-        if (typeof initializeGame === "function") {
-            initializeGame(); // Initialize the loaded game
+    function loadGame(game) {
+        if (game === "hiragana") {
+            gameFrame.src = "games/hiraganaGame.html";  // Load the Hiragana game
+        } else if (game === "katakana") {
+            gameFrame.src = "games/katakanaGame.html";  // Placeholder for Katakana game
+        } else {
+            gameFrame.src = "";
         }
-    };
-    
-    // Remove any previous script
-    const oldScript = document.querySelector("#gameScript");
-    if (oldScript) oldScript.remove();
+    }
 
-    script.id = "gameScript";
-    document.body.appendChild(script);
-}
-
-// Assign event listeners to game selection buttons
-document.getElementById("hiragana-game").addEventListener("click", () => startGame("hiragana-game"));
+    // Assign event listeners to the game selection buttons
+    document.querySelector(".game-box:nth-child(1)").addEventListener("click", () => loadGame("hiragana"));
+    document.querySelector(".game-box:nth-child(2)").addEventListener("click", () => loadGame("katakana"));
+});
