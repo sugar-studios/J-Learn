@@ -1,4 +1,6 @@
-/* General Layout */
+/* ========================
+    GENERAL STYLES
+======================== */
 main {
     display: flex;
     flex-direction: column;
@@ -13,7 +15,9 @@ section {
 }
 
 
-/* Flashcard Set Creation */
+/* ========================
+    FLASHCARD EDITOR
+======================== */
 #create-set {
     width: 80%;
     max-width: 800px;
@@ -32,7 +36,6 @@ section {
     margin-bottom: 2vh;
 }
 
-/* Input Fields */
 #flashcard-inputs {
     display: flex;
     gap: 1rem;
@@ -50,7 +53,6 @@ section {
     text-align: center;
 }
 
-/* Add Button */
 #add-card {
     background: #66bb6a;
     color: white;
@@ -66,7 +68,6 @@ section {
     background: #81c784;
 }
 
-/* Flashcard List */
 #flashcard-list {
     margin-top: 1rem;
     display: flex;
@@ -88,7 +89,6 @@ section {
     align-items: center;
 }
 
-/* Save Button */
 #save-set {
     background: #388e3c;
     color: white;
@@ -105,7 +105,6 @@ section {
     background: #4caf50;
 }
 
-/* Tag Selection with Clear Feedback */
 #tag-selection {
     display: flex;
     justify-content: center;
@@ -140,13 +139,16 @@ section {
     border: 2px solid #689f38;
 }
 
+/* ========================
+    FLASHCARD MANAGEMENT
+======================== */
 #sets-container, #edit-container {
     display: flex;
-    flex-wrap: wrap; /* Ensures wrapping when space is limited */
-    justify-content: center; /* Centers the items */
-    gap: 1rem; /* Space between cards */
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 1rem;
     margin-top: 1rem;
-    width: 100%; /* Ensures full width usage */
+    width: 100%; 
 }
 
 .set-card {
@@ -172,7 +174,6 @@ section {
     transform: scale(1.05);
 }
 
-/* Delete Button (ONLY in Edit Section) */
 #edit-container .set-card {
     position: relative;
 }
@@ -196,7 +197,9 @@ section {
     background: darkred;
 }
 
-/* Modal Styling */
+/* ========================
+    DELETE FLASHCARD MODAL
+======================== */
 .modal {
     display: none;
     position: fixed;
@@ -233,9 +236,8 @@ section {
     TAG SELECTION HAMBURGER MENU
 =============== */
 
-/* Style for the "Tags" text */
 .ham-tag-toggle-containter h3 {
-    margin: 0; /* Remove any default margins */
+    margin: 0; 
     font-size: 1.2rem;
 }
 
@@ -263,7 +265,6 @@ section {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Tag Dropdown Active Animation */
 .tag-toggle.active div:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -276,7 +277,6 @@ section {
     transform: rotate(-45deg) translate(14px, -13px);
 }
 
-/* Hide Tag Selection by Default in Mobile */
 #tag-selection {
     display: flex;
     flex-direction: row;
@@ -284,7 +284,6 @@ section {
     gap: 0.5rem;
 }
 
-/* Show When Active */
 #tag-selection.active {
     display: flex;
 }
@@ -360,21 +359,18 @@ section {
     border: 3px solid #1e1e1e;
 }
 
-/* Key (Japanese Side) */
 .light-grey {
     background: #faf3dd;
     color: #222;
     box-shadow: inset 0 -6px 0 #cfa77d;
 }
 
-/* Value (English Side) */
 .dark-grey {
     background: #272727;
     color: #fff;
     box-shadow: inset 0 -6px 0 #4caf50;
 }
 
-/* Import/Export Container */
 #import-export-container {
     margin-top: 1rem;
     text-align: center;
@@ -400,7 +396,6 @@ section {
     background: #81c784;
 }
 
-/* Flashcard Entries */
 #flashcard-list {
     margin-top: 1rem;
     display: flex;
@@ -419,7 +414,6 @@ section {
     font-weight: bold;
 }
 
-/* Delete Button */
 .delete-btn {
     background: red;
     color: white;
@@ -429,7 +423,10 @@ section {
     font-weight: bold;
 }
 
-/* Snackbar Notification */
+/* ===================
+   SNACKBAR 
+   =================== */
+
 .snackbar {
     visibility: hidden;
     min-width: 250px;
@@ -444,6 +441,10 @@ section {
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* ===================
+   **SCRAPPED** SEARCH BAR 
+   =================== */
 
 #search-container {
     text-align: center;
@@ -478,11 +479,7 @@ section {
 }
 
 
-/*
-test
-*/
 
-/* Search Section Styling */
 #search-section {
     text-align: center;
     margin: 20px 0;
@@ -506,7 +503,6 @@ test
     margin-top: 10px;
 }
 
-/* Switch Toggle Styling (Provided Code with Minor Tweaks) */
 .switch {
     display: inline-block;
     height: 34px;
@@ -590,14 +586,13 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Button Color Variants */
 #retry { background: rgb(87, 178, 131); color: white; }
 #quit { background: gray; color: white; }
 #change-mode { background: #ffc4d1; color: black; }
 #flip-back { background: #ff9800; color: white; }
 
 /* ===================
-   RESULTS SCREEN (Cuphead-Style) 
+   RESULTS SCREEN  
    =================== */
 .results-screen {
     background: linear-gradient(180deg, #ffc4d1 10%, #e6c4b5 50%, #2c2c2c 90%);
@@ -616,7 +611,6 @@ button:hover {
     text-shadow: 2px 2px 0px #ffefd5;
 }
 
-/* Grade Display */
 .grade-display {
     font-size: 4rem;
     font-weight: bold;
@@ -631,10 +625,8 @@ button:hover {
 .grade-F { color: #b71c1c; }
 
 /* ===================
-   ANIMATIONS FIXES
+   ANIMATIONS
    =================== */
-
-/* Modal Entry Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -650,7 +642,6 @@ button:hover {
     animation: fadeIn 0.3s ease-out;
 }
 
-/* Flashcard Flip Animation */
 @keyframes flipCard {
     from {
         transform: rotateY(0deg);
@@ -665,7 +656,6 @@ button:hover {
     transform: rotateY(180deg);
 }
 
-/* Flashcard Fade Out */
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -681,7 +671,6 @@ button:hover {
     animation: fadeOut 0.2s ease-in-out;
 }
 
-/* Results Screen Animation */
 @keyframes popIn {
     0% {
         opacity: 0;
@@ -701,7 +690,9 @@ button:hover {
 }
 
 
-/* Responsive Adjustments */
+/* ===================
+   RESPONISVE LAYOUT  
+   =================== */
 @media (max-width: 768px) {
     main {
         padding: 2rem;

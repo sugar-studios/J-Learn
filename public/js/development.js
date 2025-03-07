@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // Click to toggle nested tooltip section
                     blockElement.addEventListener("click", (event) => {
-                        event.stopPropagation(); // Prevent document click from closing it
+                        event.stopPropagation();
 
                         if (activeTooltip && activeTooltip !== tooltipSection) {
                             closeTooltip(activeTooltip);
@@ -98,7 +98,7 @@ function openTooltip(tooltip, blockWrapper) {
     tooltip.style.display = "block";
     tooltip.style.height = tooltip.scrollHeight + 15 + "px";
     tooltip.style.padding = "10px";
-    blockWrapper.classList.add("expanded"); // Pushes code down
+    blockWrapper.classList.add("expanded");
 }
 
 // **🔹 Function to Close Tooltip (Collapses Section)**

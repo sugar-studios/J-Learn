@@ -1,3 +1,15 @@
+/* ===================
+   IDK ANYMORE
+   THIS IS GENERAL STYLES?
+   I FEEL LIKE COMMENTING CSS IS LIKE COMMENTING ENGLISH...
+   JUST READ IT... BUT IDK
+   
+   ITS THE SAME AS FAQ BUT IT HAS A NESTED DROP DOWN INSTEAD
+   =================== */
+
+   /* ===================
+   PARENT DROPDOWN 
+   =================== */
 .development-container {
     max-width: 1000px;
     margin: 40px auto;
@@ -14,6 +26,9 @@
     margin: auto;
 }
 
+/* ===================
+   PARENT CHILD PARENT DROPDOWN
+   =================== */
 .file-entry {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
@@ -40,6 +55,9 @@
     content: " -";
 }
 
+/* ===================
+   PARENT CHILD PARENT CHILD DROPDOWN 
+   =================== */
 .file-answer {
     max-height: 0;
     overflow: hidden;
@@ -47,7 +65,6 @@
     padding: 0 10px;
 }
 
-/* Code Block Container */
 pre {
     background: #282c34;
     color: #ffffff;
@@ -67,7 +84,6 @@ pre {
     flex-direction: column;
 }
 
-/* Each code block + tooltip wrapper */
 .code-block-wrapper {
     position: relative;
     display: flex;
@@ -75,7 +91,6 @@ pre {
     transition: all 0.3s ease-in-out;
 }
 
-/* Code block styles */
 .code-block {
     display: block;
     padding: 5px;
@@ -83,13 +98,11 @@ pre {
     transition: background 0.2s ease-in-out;
 }
 
-/* Glow effect on hover */
 .code-block-wrapper.glow .code-block {
     background: rgba(255, 255, 120, 0.2);
     border-radius: 5px;
 }
 
-/* Tooltip Section (Initially Hidden) */
 .tooltip-section {
     background: rgba(0, 0, 0, 0.9);
     color: #fff;
@@ -103,12 +116,14 @@ pre {
     transition: height 0.3s ease-out, padding 0.3s ease-out;
 }
 
-/* Push Down Effect */
 .code-block-wrapper.expanded {
-    margin-bottom: 20px; /* Creates space for the expanded tooltip */
+    margin-bottom: 20px; 
 }
 
-/* Custom Syntax Highlighting */
+/* ===================
+   THIS TIES INTO THE THE GENERATED CODE IN DEVELOPMENT.JS, THE OTHER CODE IS MINE OR HEAVILY REWRITTEN BY ME, 
+   HOWEVER THE COLOURING IS NOT WRITTEN BY ME AT ALL SO I GIVE CREDIT TO CHATGPT.
+   =================== */
 .highlight.keyword { color: #c678dd; font-weight: bold; } /* Purple */
 .highlight.string { color: #98c379; } /* Green */
 .highlight.function { color: #61afef; } /* Blue */

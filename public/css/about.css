@@ -1,4 +1,6 @@
-/* ABOUT PAGE STYLES */
+/* ===================
+   GENERAL LAYOUT 
+   =================== */
 #about-container {
     max-width: 750px;
     margin: 50px auto;
@@ -7,7 +9,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     text-align: center;
-    border: 3px solid #ffc4d1; /* Logo color */
+    border: 3px solid #ffc4d1; 
 }
 
 .logo-title {
@@ -73,7 +75,9 @@ a {
     font-weight: bold;
 }
 
-/* Responsive */
+/* ===================
+   RESPONSIVE LAYOUT 
+   =================== */
 @media (max-width: 768px) {
     #about-container {
         padding: 20px;

@@ -1,4 +1,6 @@
-/* CONTACT PAGE STYLES */
+/* ===================
+   GENERAL LAYOUT 
+   =================== */
 #contact-container {
     max-width: 600px;
     margin: 50px auto;
@@ -7,7 +9,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     text-align: center;
-    border: 3px solid #ffc4d1; /* Logo color */
+    border: 3px solid #ffc4d1;
 }
 
 .inline-logo {
@@ -28,6 +30,10 @@
     color: #444;
     margin-bottom: 20px;
 }
+
+/* ===================
+   FORM LAYOUT 
+   =================== */
 
 form {
     display: flex;
@@ -73,7 +79,6 @@ button:hover {
     background: rgb(67, 148, 111);
 }
 
-/* Error Message Styling */
 .error-message {
     color: red;
     font-size: 0.9rem;
@@ -81,7 +86,9 @@ button:hover {
     height: 18px;
 }
 
-/* Responsive */
+/* ===================
+   RESPONISVE LAYOUT 
+   =================== */
 @media (max-width: 768px) {
     #contact-container {
         padding: 20px;

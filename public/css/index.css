@@ -61,11 +61,10 @@
     transform: translate(-50%, 10px);
 }
 
-/* Tooltip Arrow */
 .tooltip::before {
     content: "";
     position: absolute;
-    top: -10px; /* Adjust this to position the arrow */
+    top: -10px;
     left: 50%;
     transform: translateX(-50%);
     border-width: 5px;
@@ -105,7 +104,6 @@ main {
     padding: 3rem;
 }
 
-/* Section Styling */
 .info-section {
     display: flex;
     align-items: center;
@@ -132,7 +130,6 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Specific Section Positioning */
 #faq-link {
     margin: 15vh 60% 0 20%;
 }
@@ -141,7 +138,6 @@ main {
     margin: 15vh 20% 0 60%;
 }
 
-/* Images in Sections */
 .info-section aside img {
     max-width: 300px;
     height: auto;
@@ -158,15 +154,6 @@ section p {
     line-height: 1.8em;
 }
 
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    aside {
-        display: none;
-    }
-}
-
-/* Button */
 .btn {
     display: inline-block;
     background: rgb(87, 178, 131);
@@ -212,5 +199,14 @@ section p {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ==============
+    RESPONSIVE LAYOUT
+=============== */
+@media (max-width: 768px) {
+    aside {
+        display: none;
     }
 }
